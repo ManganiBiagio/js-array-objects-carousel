@@ -10,6 +10,9 @@
     position: absolute;
     
 }
+.my-img:hover{
+    cursor: pointer;
+}
 
 section{
     padding: 2rem 0;
