@@ -39,7 +39,7 @@ const anteprimeImgList = [];
 const anteprimeDivList = []
 
 // creo una variabile booleana per decidere lo scorrimento del thumbler
-let scrollUp=false;
+let scrollUp = false;
 
 
 
@@ -68,6 +68,7 @@ for (let i = 0; i < images.length; i++) {
     const imgEl = document.createElement("img");
     imgEl.classList.add("my-img");
     imgEl.src = images[i].image;
+    imgEl.addEventListener("click", onImg)
 
     //creo un elemento div che conterra il mio titolo e sottotitolo
     const boxTxtEl = document.createElement("div");
@@ -121,9 +122,26 @@ for (let i = 0; i < images.length; i++) {
 
 
 }
-const caroselAutoScroll=setInterval(function(){
+let caroselAutoScroll = setInterval(function () {
     scrollUp ? pushUp() : pushDown();
 }, 3000);
+
+let imgIsClosed = true;
+function onImg() {
+    if (imgIsClosed) {
+        clearInterval(caroselAutoScroll);
+        anteprimaImg.classList.add("d-none");
+        imgIsClosed=false;
+    }else{
+        caroselAutoScroll = setInterval(function () {
+            scrollUp ? pushUp() : pushDown();
+        }, 3000);
+        anteprimaImg.classList.remove("d-none");
+        imgIsClosed=true;
+
+    }
+
+}
 
 // btnDownEl.addEventListener("click", function () {
 
@@ -150,28 +168,28 @@ const caroselAutoScroll=setInterval(function(){
 
 // });
 
-btnDownEl.addEventListener("click",pushDown)
+btnDownEl.addEventListener("click", pushDown)
 function pushDown() {
     //incremento l'indice
     indice++;
 
     //aggiorno la variabile scroll up 
-    scrollUp=false;
+    scrollUp = false;
     //mi salvo in una const la qunatità di oggetti che ho
     const n = carosuelItemList.length;
     changeCarosuel(indice, n, false);
-    
+
 
 }
 
-btnUpEl.addEventListener("click",pushUp );
+btnUpEl.addEventListener("click", pushUp);
 function pushUp() {
 
     //decremento l'indice
     indice--;
 
     //aggiorno la variabile scroll up 
-    scrollUp=true;
+    scrollUp = true;
 
     //mi salvo in una const la qunatità di oggetti che ho
     const n = carosuelItemList.length;
