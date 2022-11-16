@@ -128,16 +128,23 @@ let caroselAutoScroll = setInterval(function () {
 
 let imgIsClosed = true;
 function onImg() {
+    indice=((indice % carosuelItemList.length + carosuelItemList.length) % carosuelItemList.length);
     if (imgIsClosed) {
         clearInterval(caroselAutoScroll);
         anteprimaImg.classList.add("d-none");
-        imgIsClosed=false;
-    }else{
+        imgIsClosed = false;
+        
+
+        carosuelItemList[indice].childNodes[0].style.width = "100%";
+        
+
+    } else {
         caroselAutoScroll = setInterval(function () {
             scrollUp ? pushUp() : pushDown();
         }, 3000);
         anteprimaImg.classList.remove("d-none");
-        imgIsClosed=true;
+        imgIsClosed = true;
+        carosuelItemList[indice].childNodes[0].style.width = null;
 
     }
 
