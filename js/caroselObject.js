@@ -97,7 +97,7 @@ for (let i = 0; i < images.length; i++) {
     container.addEventListener("click",function(){
         oldAnteprima=document.querySelector(".anteprima-box .border-blue");
         oldDivEffect=document.querySelector(".anteprima-box .effetto-anteprima");
-        carosuelItemList[indice].classList.add("d-none");
+        carosuelItemList[((indice % carosuelItemList.length + carosuelItemList.length) % carosuelItemList.length)].classList.add("d-none");
         
         
         oldAnteprima.classList.remove("border-blue");
