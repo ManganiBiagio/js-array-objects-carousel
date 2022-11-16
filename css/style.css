@@ -94,3 +94,21 @@ section{
 .border-blue{
     border: 2px solid lightseagreen;
 }
+
+.txt-img{
+    position: absolute;
+    bottom: 0;
+    width: 65%;
+    z-index: 13;
+    color: white;
+    padding: 1rem;
+    text-align:end ;
+
+}
+
+.txt-img h1{
+    font-size: 1.5rem;
+}
+.txt-img h5{
+    font-size: 1rem;
+}

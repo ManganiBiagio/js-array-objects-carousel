@@ -21,3 +21,73 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+//recupero tramite query selector i miei elementi
+const boxImagesEl = document.querySelector(".carosel-box");
+const btnUpEl = document.querySelector(".btn-up");
+const btnDownEl = document.querySelector(".btn-down");
+const anteprimaImg = document.querySelector(".anteprima-box");
+
+//creo un indice per il carosello
+let indice = 0;
+//creo un array che conterra il riferimento agli elementi da nascondere e mostrare al cambio indice
+const carosuelItemList=[];
+
+//Genero dinamicamente il contenuto del mio carosello
+for(let i =0;i<images.length;i++){
+    
+   
+    
+    //creo un elemento div che conterra il boxTesto e l'elemento img
+    const boxEl=document.createElement("div");
+
+    //il mio elemetno lo salvo al interno dell'array dichiarato fuori dal for
+    carosuelItemList.push(boxEl);
+
+    
+    //elemento coorispondente al mio indice ("sarà sempre 0")
+    if (i !== indice) {
+        boxEl.classList.add("d-none");
+    }
+    //utilizzo la variabile precedentemente creata per nascondere o mostrare il mio elemento genitore
+    
+
+    //creo gli elementi da appendere al genitore
+
+    //creo un elemento img gli aggiungo classe e proprietà
+    const imgEl = document.createElement("img");
+    imgEl.classList.add("my-img");
+    imgEl.src=images[i].image;
+
+    //creo un elemento div che conterra il mio titolo e sottotitolo
+    const boxTxtEl=document.createElement("div");
+    boxTxtEl.classList.add("txt-img");
+
+    //creo elemento h1 e h5 come titolo e sottotitolo e gòi assegno il valore da array di oggetti
+    const h1El=document.createElement("h1");
+    const subtittle=document.createElement("h5");
+    h1El.innerText=images[i].title;
+    subtittle.innerText=images[i].text;
+
+    //appendo gli elementi ai corrispettivi genitori
+    boxTxtEl.append(h1El,subtittle);
+    boxEl.append(boxTxtEl,imgEl);
+    boxImagesEl.append(boxEl)
+
+
+}
+
+btnUpEl.addEventListener("click",function(){
+
+    indice++;
+    
+    carosuelItemList[indice-1].classList.toggle("d-none");
+    carosuelItemList[indice].classList.toggle("d-none");
+    
+    
+    
+});
+
+btnDownEl.addEventListener("click",function(){
+    
+});
