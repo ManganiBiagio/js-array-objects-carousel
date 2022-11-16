@@ -79,15 +79,32 @@ for(let i =0;i<images.length;i++){
 
 btnUpEl.addEventListener("click",function(){
 
+    //incremento l'indice
     indice++;
-    
-    carosuelItemList[indice-1].classList.toggle("d-none");
-    carosuelItemList[indice].classList.toggle("d-none");
-    
-    
-    
+
+    //mi salvo in una const la qunatità di oggetti che ho
+    const n=carosuelItemList.length;
+
+    //(indice-1) % n + n) % n utilizzo questa formula per creare un array circolare
+    //cosi facendo l'indice sarà sempre in range
+    //infine all'indice selezionato aggiungo o tolgo d-none
+    carosuelItemList[((indice-1) % n + n) % n].classList.toggle("d-none");
+    carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");   
 });
 
 btnDownEl.addEventListener("click",function(){
-    
+
+    //decremento l'indice
+    indice--;
+
+    //mi salvo in una const la qunatità di oggetti che ho
+    const n=carosuelItemList.length;
+
+    //(indice-1) % n + n) % n utilizzo questa formula per creare un array circolare
+    //cosi facendo l'indice sarà sempre in range
+    //infine all'indice selezionato aggiungo o tolgo d-none
+    carosuelItemList[((indice+1) % n + n) % n].classList.toggle("d-none");
+    carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");   
 });
+
+
