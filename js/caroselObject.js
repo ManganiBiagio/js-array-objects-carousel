@@ -91,7 +91,27 @@ for (let i = 0; i < images.length; i++) {
     const divEffect = document.createElement("div");
     const container = document.createElement("div");
     container.classList.add("relative");
+    container.dataset.index=i;
     divEffect.classList.add("img-box");
+
+    container.addEventListener("click",function(){
+        oldAnteprima=document.querySelector(".anteprima-box .border-blue");
+        oldDivEffect=document.querySelector(".anteprima-box .effetto-anteprima");
+        carosuelItemList[indice].classList.add("d-none");
+        
+        
+        oldAnteprima.classList.remove("border-blue");
+        oldDivEffect.classList.remove("effetto-anteprima");
+        
+        this.childNodes[0].classList.add("border-blue");
+        this.childNodes[1].classList.add("effetto-anteprima");
+        indice=parseInt(this.dataset.index);
+        carosuelItemList[indice].classList.remove("d-none");
+        
+        
+
+
+    })
 
     //creo un elemento img aggiunggo src e classe
     const anteprimaEl = document.createElement("img");
