@@ -30,8 +30,13 @@ const anteprimaImg = document.querySelector(".anteprima-box");
 
 //creo un indice per il carosello
 let indice = 0;
-//creo un array che conterra il riferimento agli elementi da nascondere e mostrare al cambio indice
+//creo un array che conterra il riferimento agli elementi img da nascondere e mostrare al cambio indice
 const carosuelItemList=[];
+
+//creo un array che conterra il riferimento alle anteprime img
+const anteprimeImgList=[];
+//creo un array che conterra il riferimento alle anteprime div
+const anteprimeDivList=[]
 
 //Genero dinamicamente il contenuto del mio carosello
 for(let i =0;i<images.length;i++){
@@ -75,9 +80,43 @@ for(let i =0;i<images.length;i++){
     boxImagesEl.append(boxEl)
 
 
+    //creo due elementi uno per l'effetto e l'altro contenitore delle immagini
+    //e aggiungo rispettive classi
+    const divEffect=document.createElement("div");
+    const container=document.createElement("div");
+    container.classList.add("relative");
+    divEffect.classList.add("img-box");
+    
+    //creo un elemento img aggiunggo src e classe
+    const anteprimaEl = document.createElement("img");
+    anteprimaEl.src = images[i].image;
+    anteprimaEl.classList.add( "anteprima-img");
+    anteprimaEl.alt = "";
+    //attivo l'immagine con l'effetto corrispondente all'indice
+    if (i === indice) {
+        divEffect.classList.add("effetto-anteprima");
+        anteprimaEl.classList.add("border-blue")
+    }
+
+    //calcolo l'altezza dinamicamente per le anteprime
+    container.style.height = `calc( 100% / ${images.length} )`;
+
+    //appendo i rispettivi elementi ai contenitori
+    container.append(anteprimaEl);
+    container.append(divEffect);
+    anteprimaImg.append(container);
+
+    //mi salvo il riferimetno al img nel array
+    anteprimeImgList.push(anteprimaEl);
+
+    //mi salvo il riferimetno al div nel array
+    anteprimeDivList.push(divEffect);
+
+
+
 }
 
-btnUpEl.addEventListener("click",function(){
+btnDownEl.addEventListener("click",function(){
 
     //incremento l'indice
     indice++;
@@ -89,10 +128,19 @@ btnUpEl.addEventListener("click",function(){
     //cosi facendo l'indice sarà sempre in range
     //infine all'indice selezionato aggiungo o tolgo d-none
     carosuelItemList[((indice-1) % n + n) % n].classList.toggle("d-none");
-    carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");   
+    carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");  
+    
+    //aggiungo e tolgo al thumbnail gli effetti
+    anteprimeImgList[((indice-1) % n + n) % n].classList.toggle("border-blue");
+    anteprimeImgList[((indice) % n + n) % n].classList.toggle("border-blue");
+    anteprimeDivList[((indice-1) % n + n) % n].classList.toggle("effetto-anteprima");
+    anteprimeDivList[((indice) % n + n) % n].classList.toggle("effetto-anteprima");
+
+    
+
 });
 
-btnDownEl.addEventListener("click",function(){
+btnUpEl.addEventListener("click",function(){
 
     //decremento l'indice
     indice--;
@@ -105,6 +153,12 @@ btnDownEl.addEventListener("click",function(){
     //infine all'indice selezionato aggiungo o tolgo d-none
     carosuelItemList[((indice+1) % n + n) % n].classList.toggle("d-none");
     carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");   
+
+    //aggiungo e tolgo al thumbnail gli effetti
+    anteprimeImgList[((indice+1) % n + n) % n].classList.toggle("border-blue");
+    anteprimeImgList[((indice) % n + n) % n].classList.toggle("border-blue");
+    anteprimeDivList[((indice+1) % n + n) % n].classList.toggle("effetto-anteprima");
+    anteprimeDivList[((indice) % n + n) % n].classList.toggle("effetto-anteprima");
 });
 
 
