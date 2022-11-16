@@ -38,6 +38,9 @@ const anteprimeImgList = [];
 //creo un array che conterra il riferimento alle anteprime div
 const anteprimeDivList = []
 
+// creo una variabile booleana per decidere lo scorrimento del thumbler
+let scrollUp=false;
+
 
 
 //Genero dinamicamente il contenuto del mio carosello
@@ -118,7 +121,9 @@ for (let i = 0; i < images.length; i++) {
 
 
 }
-setInterval(pushDown, 3000);
+const caroselAutoScroll=setInterval(function(){
+    scrollUp ? pushUp() : pushDown();
+}, 3000);
 
 // btnDownEl.addEventListener("click", function () {
 
@@ -149,16 +154,24 @@ btnDownEl.addEventListener("click",pushDown)
 function pushDown() {
     //incremento l'indice
     indice++;
+
+    //aggiorno la variabile scroll up 
+    scrollUp=false;
     //mi salvo in una const la qunatità di oggetti che ho
     const n = carosuelItemList.length;
-    changeCarosuel(indice, n, false)
+    changeCarosuel(indice, n, false);
+    
 
 }
 
-btnUpEl.addEventListener("click", function () {
+btnUpEl.addEventListener("click",pushUp );
+function pushUp() {
 
     //decremento l'indice
     indice--;
+
+    //aggiorno la variabile scroll up 
+    scrollUp=true;
 
     //mi salvo in una const la qunatità di oggetti che ho
     const n = carosuelItemList.length;
@@ -175,7 +188,7 @@ btnUpEl.addEventListener("click", function () {
     // anteprimeImgList[((indice) % n + n) % n].classList.toggle("border-blue");
     // anteprimeDivList[((indice+1) % n + n) % n].classList.toggle("effetto-anteprima");
     // anteprimeDivList[((indice) % n + n) % n].classList.toggle("effetto-anteprima");
-});
+}
 
 /**
  * Questa funzione cambia le classi per generare l'effetto carosuel gli passo come valori 
