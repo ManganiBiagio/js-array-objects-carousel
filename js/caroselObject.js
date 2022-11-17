@@ -94,6 +94,7 @@ for (let i = 0; i < images.length; i++) {
     container.dataset.index=i;
     divEffect.classList.add("img-box");
 
+    //aggiungo eventlistener su anteprima 
     container.addEventListener("click",function(){
         oldAnteprima=document.querySelector(".anteprima-box .border-blue");
         oldDivEffect=document.querySelector(".anteprima-box .effetto-anteprima");
@@ -142,10 +143,13 @@ for (let i = 0; i < images.length; i++) {
 
 
 }
+
+//autoscroll intervall
 let caroselAutoScroll = setInterval(function () {
     scrollUp ? pushUp() : pushDown();
 }, 3000);
 
+//variabile che analizza lo status della mia foto se aperta false se chiusa true
 let imgIsClosed = true;
 function onImg() {
     indice=((indice % carosuelItemList.length + carosuelItemList.length) % carosuelItemList.length);
@@ -170,30 +174,7 @@ function onImg() {
 
 }
 
-// btnDownEl.addEventListener("click", function () {
 
-//     //incremento l'indice
-//     indice++;
-
-//     //mi salvo in una const la qunatità di oggetti che ho
-//     const n = carosuelItemList.length;
-//     changeCarosuel(indice, n, false)
-
-//     // //(indice-1) % n + n) % n utilizzo questa formula per creare un array circolare
-//     // //cosi facendo l'indice sarà sempre in range
-//     // //infine all'indice selezionato aggiungo o tolgo d-none
-//     // carosuelItemList[((indice-1) % n + n) % n].classList.toggle("d-none");
-//     // carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");  
-
-//     // //aggiungo e tolgo al thumbnail gli effetti
-//     // anteprimeImgList[((indice-1) % n + n) % n].classList.toggle("border-blue");
-//     // anteprimeImgList[((indice) % n + n) % n].classList.toggle("border-blue");
-//     // anteprimeDivList[((indice-1) % n + n) % n].classList.toggle("effetto-anteprima");
-//     // anteprimeDivList[((indice) % n + n) % n].classList.toggle("effetto-anteprima");
-
-
-
-// });
 
 btnDownEl.addEventListener("click", pushDown)
 function pushDown() {
@@ -222,17 +203,7 @@ function pushUp() {
     const n = carosuelItemList.length;
 
     changeCarosuel(indice, n, true)
-    // //(indice-1) % n + n) % n utilizzo questa formula per creare un array circolare
-    // //cosi facendo l'indice sarà sempre in range
-    // //infine all'indice selezionato aggiungo o tolgo d-none
-    // carosuelItemList[((indice+1) % n + n) % n].classList.toggle("d-none");
-    // carosuelItemList[(indice % n + n) % n].classList.toggle("d-none");   
 
-    // //aggiungo e tolgo al thumbnail gli effetti
-    // anteprimeImgList[((indice+1) % n + n) % n].classList.toggle("border-blue");
-    // anteprimeImgList[((indice) % n + n) % n].classList.toggle("border-blue");
-    // anteprimeDivList[((indice+1) % n + n) % n].classList.toggle("effetto-anteprima");
-    // anteprimeDivList[((indice) % n + n) % n].classList.toggle("effetto-anteprima");
 }
 
 /**
@@ -250,6 +221,8 @@ function changeCarosuel(indice, lenght, isUp) {
         k = 1;
     }
 
+    // //(indice-1) % n + n) % n utilizzo questa formula per creare un array circolare
+    // //cosi facendo l'indice sarà sempre in range
     carosuelItemList[((indice + k) % lenght + lenght) % lenght].classList.toggle("d-none");
     carosuelItemList[(indice % lenght + lenght) % lenght].classList.toggle("d-none");
 
